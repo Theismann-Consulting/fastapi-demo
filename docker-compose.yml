@@ -39,6 +39,7 @@ services:
       - ./.docker/.ipython:/root/.ipython:cached
     environment:
       PYTHONPATH: .
+      DATABASE_URL: ${DATABASE_URL}
 
   frontend:
     build:
