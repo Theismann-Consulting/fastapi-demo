@@ -1,3 +1,3 @@
-export const BASE_URL: string = 'http://localhost:8000';
+export const BASE_URL: string = 'http://crazy-elysha-theismann-consulting-25d5438a.koyeb.app/';
 export const BACKEND_URL: string =
-  'http://localhost:8000/api/v1';
+  'http://misleading-henrieta-theismann-consulting-0d201731.koyeb.app/api/v1/';
