@@ -23,6 +23,9 @@ async def db_session_middleware(request: Request, call_next):
     request.state.db.close()
     return response
 
+@app.get("/")
+async def health_check():
+    return {"message": "FastAPI Demo is Alive!"}
 
 @app.get("/api/v1")
 async def root():
