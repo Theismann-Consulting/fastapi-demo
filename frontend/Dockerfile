@@ -10,7 +10,7 @@ WORKDIR /app
 ADD . /app
 
 EXPOSE 8000
-EXPOSE 35729
+# EXPOSE 35729
 
 ENTRYPOINT ["/bin/bash", "/app/run.sh"]
 CMD ["start"]
