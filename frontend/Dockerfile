@@ -1,16 +1,22 @@
 FROM node:12
 
-ADD package.json /package.json
 
-ENV NODE_PATH=/node_modules
-ENV PATH=$PATH:/node_modules/.bin
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the package.json and package-lock.json to the working directory
+COPY ./package*.json ./
+
+# Install the dependencies
 RUN npm install
 
-WORKDIR /app
-ADD . /app
+COPY . .
 
-EXPOSE 8000
-# EXPOSE 35729
+# Build the application
+RUN npm run build
 
-ENTRYPOINT ["/bin/bash", "/app/run.sh"]
-CMD ["start"]
+# Expose port 3000 for the application
+EXPOSE 3000
+
+# Start the Application
+CMD [ "npm", "run", "start"]
