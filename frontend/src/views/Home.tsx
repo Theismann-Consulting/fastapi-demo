@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 
 import { getMessage } from '../utils/api';
 import { isAuthenticated } from '../utils/auth';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   link: {
     color: '#61dafb',
   },
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 export const Home: FC = () => {
   const [message, setMessage] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const queryBackend = async () => {
     try {

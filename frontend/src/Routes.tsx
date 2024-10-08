@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { useHistory } from 'react-router';
-import { makeStyles } from '@material-ui/core/styles';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { makeStyles } from 'tss-react/mui';
 
 import { Home, Login, SignUp, Protected, PrivateRoute } from './views';
 import { Admin } from './admin';
 import { logout } from './utils/auth';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   app: {
     textAlign: 'center',
   },
@@ -23,32 +22,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Routes: FC = () => {
-  const classes = useStyles();
-  const history = useHistory();
+export const AllRoutes: FC = () => {
+  const { classes } = useStyles();
+  const navigate = useNavigate();
 
   return (
-    <Switch>
-      <Route path="/admin">
-        <Admin />
-      </Route>
+    <Routes>
+      <Route path="/admin" element={<Admin />} />
 
-      <div className={classes.app}>
-        <header className={classes.header}>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
+      {/* <div className={classes.app}> */}
+        {/* <header className={classes.header}> */}
+          <Route path="/login" element={<Login/>} />
+          <Route path="/signup" element={<SignUp/>} />
           <Route
             path="/logout"
             render={() => {
               logout();
-              history.push('/');
+              navigate('/');
               return null;
             }}
           />
-          <PrivateRoute path="/protected" component={Protected} />
-          <Route exact path="/" component={Home} />
-        </header>
-      </div>
-    </Switch>
+          <Route
+            path="/protected"
+            element={
+              <PrivateRoute>
+                <Protected />
+              </PrivateRoute>
+            }
+          />
+          <Route exact path="/" element={<Home/>} />
+        {/* </header>
+      </div> */}
+    </Routes>
   );
 };

@@ -1,6 +1,13 @@
 import React, { FC } from 'react';
-import { Routes } from './Routes';
+import { BrowserRouter } from 'react-router-dom';
+import { AllRoutes as Routes } from './Routes';
 
-const App: FC = () => <Routes />;
+const App: FC = () => {
+    return (
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
+      );
+}
 
 export default App;

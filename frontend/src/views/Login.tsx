@@ -6,16 +6,15 @@ import {
   Button,
   FormControlLabel,
   Checkbox,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Face, Fingerprint } from '@material-ui/icons';
-import { Alert } from '@material-ui/lab';
-import { Redirect } from 'react-router-dom';
-import { useHistory } from 'react-router';
+  Alert,
+} from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
+import { Face, Fingerprint } from '@mui/icons-material';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { login, isAuthenticated } from '../utils/auth';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   margin: {
     margin: theme.spacing(2),
   },
@@ -31,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Login: FC = () => {
-  const classes = useStyles();
-  const history = useHistory();
+  const { classes } = useStyles();
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -43,7 +42,7 @@ export const Login: FC = () => {
       const data = await login(email, password);
 
       if (data) {
-        history.push('/');
+        navigate('/');
       }
     } catch (err) {
       if (err instanceof Error) {
@@ -57,7 +56,7 @@ export const Login: FC = () => {
   };
 
   return isAuthenticated() ? (
-    <Redirect to="/" />
+    <Navigate to="/" />
   ) : (
     <Paper className={classes.padding}>
       <div className={classes.margin}>
@@ -131,7 +130,7 @@ export const Login: FC = () => {
             variant="outlined"
             color="primary"
             className={classes.button}
-            onClick={() => history.push('/signup')}
+            onClick={() => navigate('/signup')}
           >
             Sign Up
           </Button>{' '}

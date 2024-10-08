@@ -1,14 +1,12 @@
 import React, { FC, useState } from 'react';
-import { Paper, Grid, TextField, Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Face, Fingerprint } from '@material-ui/icons';
-import { Alert } from '@material-ui/lab';
-import { Redirect } from 'react-router-dom';
-import { useHistory } from 'react-router';
+import { Paper, Grid, TextField, Button, Alert } from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
+import { Face, Fingerprint } from '@mui/icons-material';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { signUp, isAuthenticated } from '../utils/auth';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   margin: {
     margin: theme.spacing(2),
   },
@@ -24,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const SignUp: FC = () => {
-  const classes = useStyles();
-  const history = useHistory();
+  const { classes } = useStyles();
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
@@ -40,7 +38,7 @@ export const SignUp: FC = () => {
         const data = await signUp(email, password, passwordConfirmation);
 
         if (data) {
-          history.push('/');
+          navigate('/');
         }
       } catch (err) {
         if (err instanceof Error) {
@@ -55,7 +53,7 @@ export const SignUp: FC = () => {
   };
 
   return isAuthenticated() ? (
-    <Redirect to="/" />
+    <Navigate to="/" />
   ) : (
     <Paper className={classes.padding}>
       <div className={classes.margin}>

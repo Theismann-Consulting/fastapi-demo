@@ -1,5 +1,4 @@
-FROM node:12
-
+FROM node:18
 
 # Set the working directory to /app
 WORKDIR /app
@@ -12,7 +11,7 @@ RUN npm install
 
 COPY . .
 
-# Build the application
+# # Build the application
 RUN npm run build
 
 # Expose port 3000 for the application

@@ -2,3 +2,6 @@
 node_modules
 __pycache__
 backend/.python-version
+.next
+next-env.d.ts
+dist
