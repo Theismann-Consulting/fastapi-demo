@@ -8,13 +8,14 @@ import {
   Checkbox,
   Alert,
 } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
+import { makeStyles } from '@mui/styles';
 import { Face, Fingerprint } from '@mui/icons-material';
 import { Navigate, useNavigate } from 'react-router-dom';
+import theme from '../theme'
 
 import { login, isAuthenticated } from '../utils/auth';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles({
   margin: {
     margin: theme.spacing(2),
   },
@@ -27,10 +28,10 @@ const useStyles = makeStyles()((theme) => ({
   marginTop: {
     marginTop: 10,
   },
-}));
+});
 
 export const Login: FC = () => {
-  const { classes } = useStyles();
+  const classes = useStyles();
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');

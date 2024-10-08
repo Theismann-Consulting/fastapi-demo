@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { makeStyles } from 'tss-react/mui';
+import { makeStyles } from '@mui/styles';
 
 import { Home, Login, SignUp, Protected, PrivateRoute } from './views';
 import { Admin } from './admin';
 import { logout } from './utils/auth';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles({
   app: {
     textAlign: 'center',
   },
@@ -20,10 +20,10 @@ const useStyles = makeStyles()((theme) => ({
     fontSize: 'calc(10px + 2vmin)',
     color: 'white',
   },
-}));
+});
 
 export const AllRoutes: FC = () => {
-  const { classes } = useStyles();
+  const classes = useStyles();
   const navigate = useNavigate();
 
   return (

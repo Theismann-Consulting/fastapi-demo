@@ -1,4 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
+import { json } from 'react-router-dom';
 
 export const isAuthenticated = () => {
   const permissions = localStorage.getItem('permissions');
@@ -21,17 +22,18 @@ export const login = async (email: string, password: string) => {
   if (!(email.length > 0) || !(password.length > 0)) {
     throw new Error('Email or password was not provided');
   }
-  const formData = new FormData();
-  // OAuth2 expects form data, not JSON data
-  formData.append('username', email);
-  formData.append('password', password);
+  const formData = JSON.stringify({
+    "username": email,
+    "password": password
+  })
 
   const request = new Request('/api/token', {
     method: 'POST',
     body: formData,
   });
-
+  
   const response = await fetch(request);
+  console.log(`Login Response: ${response.json()}`)
 
   if (response.status === 500) {
     throw new Error('Internal server error');

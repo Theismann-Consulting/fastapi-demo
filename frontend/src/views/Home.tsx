@@ -1,19 +1,19 @@
 import React, { FC, useState } from 'react';
-import { makeStyles } from 'tss-react/mui';
+import { makeStyles } from '@mui/styles';
 
 import { getMessage } from '../utils/api';
 import { isAuthenticated } from '../utils/auth';
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles({
   link: {
     color: '#61dafb',
   },
-}));
+});
 
 export const Home: FC = () => {
   const [message, setMessage] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const { classes } = useStyles();
+  const classes = useStyles();
 
   const queryBackend = async () => {
     try {
