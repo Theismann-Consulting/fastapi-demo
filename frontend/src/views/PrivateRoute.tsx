@@ -25,7 +25,7 @@
 // );
 
 import React, { FC } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 function useAuth() {
   // This is a placeholder for your authentication logic.
@@ -34,7 +34,7 @@ function useAuth() {
   return user && user.loggedIn;
 }
 
-export const PrivateRoute: FC = ({ children }) => {
+export const PrivateRoute= () => {
   const isAuthenticated = useAuth();
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 }

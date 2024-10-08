@@ -22,6 +22,13 @@ const useStyles = makeStyles({
   },
 });
 
+function Logout() {
+  const navigate = useNavigate();
+  logout();
+  navigate('/')
+  return null
+}
+
 export const AllRoutes: FC = () => {
   const classes = useStyles();
   const navigate = useNavigate();
@@ -36,21 +43,16 @@ export const AllRoutes: FC = () => {
           <Route path="/signup" element={<SignUp/>} />
           <Route
             path="/logout"
-            render={() => {
-              logout();
-              navigate('/');
-              return null;
-            }}
+            element={<Logout />}
           />
-          <Route
-            path="/protected"
-            element={
-              <PrivateRoute>
-                <Protected />
-              </PrivateRoute>
-            }
-          />
-          <Route exact path="/" element={<Home/>} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/protected"
+              element={
+                  <Protected />
+              }
+            />
+          </Route>
+          <Route path="/" element={<Home/>} />
         {/* </header>
       </div> */}
     </Routes>
